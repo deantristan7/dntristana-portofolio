@@ -21,7 +21,6 @@ export default function Home() {
               "/images/pc-3.jpeg"
             ]}
             title="Project 1"
-            description="Brief description of project 1."
             onClick={() => console.log('Project 1 clicked')}
           />
           <div className="place-self-center">
@@ -39,7 +38,6 @@ export default function Home() {
               "/images/pc-6.jpg"
             ]}
             title="Hobby 1"
-            description="Brief description of hobby 1."
             onClick={() => console.log('Hobby 1 clicked')}
           />
           <div className="place-self-center">

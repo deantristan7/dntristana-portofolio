@@ -2,14 +2,13 @@
 import Image from "next/image";
 
 interface PhotoCardProps {
-  images: string[]; // Array of image URLs
+  images?: string[]; // Array of image URLs
   title: string;
-  description: string;
   onClick: () => void;
   className?: string; // Add className prop
 }
 
-const PhotoCard: React.FC<PhotoCardProps> = ({ images, title, description, onClick, className }) => {
+const PhotoCard: React.FC<PhotoCardProps> = ({ images = [], title, onClick, className }) => {
   return (
     <div
       className={`relative overflow-visible cursor-pointer rounded-lg lg:scale-150 ${className}`} // Apply className
@@ -20,7 +19,7 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ images, title, description, onCli
         <Image
           key={index}
           src={imageSrc}
-          alt={`${title} ${description} image ${index + 1}`}
+          alt={`${title} image ${index + 1}`}
           width={300}
           height={300}
           className={`absolute border-2 border-white rounded-lg duration-300 object-cover w-40 h-40 transition-transform transform hover:scale-110 ${index === 0
