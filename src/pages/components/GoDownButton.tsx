@@ -9,7 +9,7 @@ const GoDownButton: React.FC = () => {
   return (
     <button
       onClick={scrollToNextSection}
-      className="mt-8 p-2 cursor-pointer text-center text-white rounded transition-transform transform hover:scale-105"
+      className="mt-8 p-2 cursor-pointer text-center text-white rounded transition-transform transform hover:scale-105 text-sm lg:text-xl"
     >
       Go Down
     </button>

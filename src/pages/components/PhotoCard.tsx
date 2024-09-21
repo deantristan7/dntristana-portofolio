@@ -12,26 +12,25 @@ interface PhotoCardProps {
 const PhotoCard: React.FC<PhotoCardProps> = ({ images, title, description, onClick, className }) => {
   return (
     <div
-      className={`relative cursor-pointer border-2 border-white rounded-lg overflow-hidden transition-transform transform hover:scale-110 ${className}`} // Apply className
+      className={`relative overflow-visible cursor-pointer rounded-lg lg:scale-150 ${className}`} // Apply className
       onClick={onClick}
-      style={{ width: '300px', height: '200px' }} // Set fixed dimensions
+      style={{ width: '300px', height: '300px' }} // Adjust dimensions to square for better fit
     >
       {images.map((imageSrc, index) => (
         <Image
           key={index}
           src={imageSrc}
-          alt={`${title} image ${index + 1}`}
+          alt={`${title} ${description} image ${index + 1}`}
           width={300}
-          height={200}
-          className={`absolute transition-transform duration-300 object-cover w-full h-full ${
-            index === 0 ? 'z-10' : index === 1 ? 'z-5 transform translate-x-4 translate-y-4' : 'z-0 transform translate-x-8 translate-y-8'
-          }`}
+          height={300}
+          className={`absolute border-2 border-white rounded-lg duration-300 object-cover w-40 h-40 transition-transform transform hover:scale-110 ${index === 0
+              ? 'z-10 left-1/2 transform -translate-x-1/2' // Center image
+              : index === 1
+                ? 'z-5 left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-12' // Left, rotated
+                : 'z-0 -right-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-12' // Right, rotated
+            }`}
         />
       ))}
-      <div className="p-4 bg-black absolute bottom-0 w-full">
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
-        <p className="text-sm text-gray-400">{description}</p>
-      </div>
     </div>
   );
 };
