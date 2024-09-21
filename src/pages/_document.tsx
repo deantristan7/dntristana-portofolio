@@ -22,6 +22,8 @@ export default function Document() {
         <meta name="twitter:title" content="Dean Tristan | Full-Stack Developer" />
         <meta name="twitter:description" content="Explore the personal portfolio of Dean Tristan, a full-stack developer specializing in Go, PHP, and metal-themed projects." />
         <meta name="twitter:image" content="/images/og-image.png" />
+        
+        <link rel="icon" type="image/x-icon" href="/images/pentagram.png" />
 
         <link
           href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap"
