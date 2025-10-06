@@ -5,25 +5,25 @@ export default function Document() {
 
   return (
     <Html lang="en">
-      <title>Dean Tristan | Full-Stack Developer</title>
+      <title>Dean Tristan | Architect of Dark Code & Logic</title>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Dean Tristan's personal portfolio website. Explore my projects, skills, and experience in full-stack development." />
+        <meta name="description" content="The personal domain of Dean Tristan. A space where logic meets chaos, fueled by the raw energy of metal, deep thought, and the solitude of high places." />
         <meta name="author" content="Dean Tristan" />
         <meta name="keywords" content="Dean Tristan, portfolio, full-stack developer, web development, projects" />
 
         {/* Open Graph / Facebook */}
-        <meta property="og:title" content="Dean Tristan | Full-Stack Developer" />
-        <meta property="og:description" content="Discover the projects, skills, and experience of Dean Tristan, a full-stack developer with a passion for coding and dark arts." />
+        <meta property="og:title" content="Dean Tristan | Software Engineer" />
+        <meta property="og:description" content="Explore Dean's world. Building logic by day, creating chaos with a metal band by night, and finding inspiration on the mountain trails." />
         <meta property="og:image" content={`${vercelUrl}/images/pentagram.png`} />
         <meta property="og:url" content={vercelUrl} />
         <meta property="og:type" content="website" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Dean Tristan | Full-Stack Developer" />
-        <meta name="twitter:description" content="Explore the personal portfolio of Dean Tristan, a full-stack developer specializing in Go, PHP, and metal-themed projects." />
+        <meta name="twitter:title" content="Dean Tristan | Software Engineer" />
+        <meta name="twitter:description" content="Explore Dean's world. Building logic by day, creating chaos with a metal band by night, and finding inspiration on the mountain trails." />
         <meta name="twitter:image" content={`${vercelUrl}/images/pentagram.png`} />
 
         <link rel="icon" type="image/x-icon" href="/images/pentagram.png" />
