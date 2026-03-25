@@ -596,7 +596,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Dean Tristan | Software Engineer</title>
+        <title>Dean Tristan - Software Engineer</title>
         <meta
           name="description"
           content="Backend engineer — Golang, PHP, distributed systems. 5+ years building internal platforms at scale."
