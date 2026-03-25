@@ -4,7 +4,7 @@ export default function Document() {
   const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
 
   return (
-    <Html lang="en">
+    <Html lang="en" className="dark" suppressHydrationWarning>
       <title>Dean Tristan | Full Stack Engineer</title>
       <Head>
         <meta charSet="UTF-8" />

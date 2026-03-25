@@ -127,6 +127,32 @@ function useIntersectionObserver(threshold = 0.15) {
   return { ref, visible };
 }
 
+// ─── ICONS ───────────────────────────────────────────────────────────────────
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
+
 // ─── COMPONENTS ──────────────────────────────────────────────────────────────
 
 function GlitchText({ text, className = "" }: { text: string; className?: string }) {
@@ -146,7 +172,7 @@ function SectionLabel({ label }: { label: string }) {
   );
 }
 
-function NavBar() {
+function NavBar({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -160,43 +186,65 @@ function NavBar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-black/90 backdrop-blur-md border-b border-white/5" : ""
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-zinc-200 dark:border-white/5"
+          : ""
+      }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="#" className="font-display text-lg font-black tracking-widest text-white">
+        <a href="#" className="font-display text-lg font-black tracking-widest text-zinc-900 dark:text-white">
           DN<span className="text-red-500">.</span>
         </a>
+
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <a
               key={l}
               href={`#${l}`}
-              className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-400 hover:text-white transition-colors duration-200"
+              className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200"
             >
               {l}
             </a>
           ))}
+          <button
+            onClick={onToggle}
+            className="ml-1 p-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </button>
         </div>
-        <button
-          className="md:hidden text-zinc-400 hover:text-white"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <div className="w-5 flex flex-col gap-1.5">
-            <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-          </div>
-        </button>
+
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={onToggle}
+            className="p-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button
+            className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <div className="w-5 flex flex-col gap-1.5">
+              <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            </div>
+          </button>
+        </div>
       </div>
+
       {menuOpen && (
-        <div className="md:hidden bg-black/95 border-t border-white/5 px-6 py-6 flex flex-col gap-5">
+        <div className="md:hidden bg-white/95 dark:bg-black/95 border-t border-zinc-200 dark:border-white/5 px-6 py-6 flex flex-col gap-5">
           {links.map((l) => (
             <a
               key={l}
               href={`#${l}`}
               onClick={() => setMenuOpen(false)}
-              className="text-sm font-mono tracking-[0.2em] uppercase text-zinc-400 hover:text-white"
+              className="text-sm font-mono tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             >
               {l}
             </a>
@@ -224,19 +272,19 @@ function HeroSection() {
         </div>
 
         <div className="space-y-4">
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] font-black leading-none tracking-tight text-white">
+          <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] font-black leading-none tracking-tight text-zinc-900 dark:text-white">
             DEAN
             <br />
-            <GlitchText text="TRISTAN" className="text-white" />
+            <GlitchText text="TRISTAN" className="text-zinc-900 dark:text-white" />
           </h1>
         </div>
 
         <div className="mt-8 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
           <div className="max-w-lg">
-            <p className="text-zinc-300 text-lg leading-relaxed font-light">
+            <p className="text-zinc-700 dark:text-zinc-300 text-lg leading-relaxed font-light">
               Backend engineer, 5+ years building internal platforms at scale.
               Currently at{" "}
-              <span className="text-white font-medium">BRI</span> — writing code and leading a squad.
+              <span className="text-zinc-900 dark:text-white font-medium">BRI</span> — writing code and leading a squad.
             </p>
             <p className="mt-3 text-zinc-500 text-sm leading-relaxed">
               Mainly Golang and PHP. I like the problems that only show up at scale —
@@ -253,20 +301,20 @@ function HeroSection() {
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 border border-white/20 hover:border-white/50 text-white text-sm font-mono tracking-widest uppercase transition-colors duration-200"
+              className="px-6 py-3 border border-zinc-300 dark:border-white/20 hover:border-zinc-500 dark:hover:border-white/50 text-zinc-900 dark:text-white text-sm font-mono tracking-widest uppercase transition-colors duration-200"
             >
               Contact
             </a>
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-3 gap-px bg-white/5 border border-white/5">
+        <div className="mt-16 grid grid-cols-3 gap-px bg-zinc-200 dark:bg-white/5 border border-zinc-200 dark:border-white/5">
           {[
             { n: "5+", label: "Years Experience" },
             { n: "80%", label: "Faster Query Times" },
             { n: "BRI", label: "Current Company" },
           ].map(({ n, label }) => (
-            <div key={label} className="bg-black px-6 py-5">
+            <div key={label} className="bg-white dark:bg-black px-6 py-5">
               <div className="font-display text-2xl font-black text-red-500">{n}</div>
               <div className="text-xs font-mono text-zinc-500 tracking-wider mt-1 uppercase">{label}</div>
             </div>
@@ -285,18 +333,19 @@ function HeroSection() {
 function SkillsSection() {
   const { ref, visible } = useIntersectionObserver();
   return (
-    <section id="skills" className="py-24 px-6 border-t border-white/5">
+    <section id="skills" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
       <div className="max-w-6xl mx-auto">
         <SectionLabel label="02 — Tech Stack" />
         <div
           ref={ref}
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-200 dark:bg-white/5 transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
           {skills.map(({ category, items }, i) => (
             <div
               key={category}
-              className="bg-black p-6 group hover:bg-zinc-900/50 transition-colors duration-300"
+              className="bg-white dark:bg-black p-6 group hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-300"
               style={{ transitionDelay: `${i * 60}ms` }}
             >
               <h3 className="text-[10px] font-mono tracking-[0.3em] text-red-500 uppercase mb-4">
@@ -306,7 +355,7 @@ function SkillsSection() {
                 {items.map((item) => (
                   <span
                     key={item}
-                    className="text-xs px-2.5 py-1 border border-white/10 text-zinc-300 font-mono group-hover:border-white/20 transition-colors duration-300"
+                    className="text-xs px-2.5 py-1 border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 font-mono group-hover:border-zinc-300 dark:group-hover:border-white/20 transition-colors duration-300"
                   >
                     {item}
                   </span>
@@ -325,28 +374,30 @@ function ExperienceSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="experience" className="py-24 px-6 border-t border-white/5">
+    <section id="experience" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
       <div className="max-w-6xl mx-auto">
         <SectionLabel label="03 — Experience" />
         <div
           ref={ref}
-          className={`flex flex-col md:flex-row gap-0 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+          className={`flex flex-col md:flex-row gap-0 transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
-          <div className="md:w-56 flex md:flex-col border-b md:border-b-0 md:border-r border-white/10 overflow-x-auto md:overflow-visible">
+          <div className="md:w-56 flex md:flex-col border-b md:border-b-0 md:border-r border-zinc-200 dark:border-white/10 overflow-x-auto md:overflow-visible">
             {experiences.map((exp, i) => (
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`text-left px-4 py-4 text-xs font-mono whitespace-nowrap md:whitespace-normal border-b border-white/5 transition-all duration-200 ${active === i
-                  ? "text-white bg-white/5 border-l-2 border-l-red-500"
-                  : "text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]"
-                  }`}
+                className={`text-left px-4 py-4 text-xs font-mono whitespace-nowrap md:whitespace-normal border-b border-zinc-100 dark:border-white/5 transition-all duration-200 ${
+                  active === i
+                    ? "text-zinc-900 dark:text-white bg-zinc-100 dark:bg-white/5 border-l-2 border-l-red-500"
+                    : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-white/[0.02]"
+                }`}
               >
                 <div className="font-bold text-[11px] tracking-wide">
                   {exp.company.split(" ").slice(0, 3).join(" ")}
                 </div>
-                <div className="text-[10px] text-zinc-600 mt-0.5 tracking-wider">
+                <div className="text-[10px] text-zinc-400 dark:text-zinc-600 mt-0.5 tracking-wider">
                   {exp.period.split(" – ")[0]}
                 </div>
               </button>
@@ -358,17 +409,17 @@ function ExperienceSection() {
               const exp = experiences[active];
               return (
                 <div key={active} className="animate-fadeIn">
-                  <h3 className="font-display text-xl font-black text-white mb-1">{exp.role}</h3>
+                  <h3 className="font-display text-xl font-black text-zinc-900 dark:text-white mb-1">{exp.role}</h3>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 mb-6">
                     <span className="text-red-400 text-sm font-mono">{exp.company}</span>
-                    <span className="text-zinc-600 text-xs font-mono self-center">·</span>
+                    <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono self-center">·</span>
                     <span className="text-zinc-500 text-xs font-mono">{exp.period}</span>
-                    <span className="text-zinc-600 text-xs font-mono self-center">·</span>
+                    <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono self-center">·</span>
                     <span className="text-zinc-500 text-xs font-mono">{exp.type}</span>
                   </div>
                   <ul className="space-y-3">
                     {exp.points.map((p, j) => (
-                      <li key={j} className="flex gap-3 text-sm text-zinc-400 leading-relaxed">
+                      <li key={j} className="flex gap-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         <span className="text-red-500 mt-1.5 text-[8px]">▶</span>
                         <span>{p}</span>
                       </li>
@@ -387,37 +438,38 @@ function ExperienceSection() {
 function ProjectsSection() {
   const { ref, visible } = useIntersectionObserver();
   return (
-    <section id="projects" className="py-24 px-6 border-t border-white/5">
+    <section id="projects" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
       <div className="max-w-6xl mx-auto">
         <SectionLabel label="04 — Selected Work" />
         <div
           ref={ref}
-          className={`grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-200 dark:bg-white/5 transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
           {projects.map((p, i) => (
             <div
               key={p.name}
-              className="bg-black p-7 group hover:bg-zinc-900/40 transition-colors duration-300 flex flex-col"
+              className="bg-white dark:bg-black p-7 group hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors duration-300 flex flex-col"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <div className="flex items-start justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-[0.3em] text-zinc-600 uppercase">
+                <span className="text-[10px] font-mono tracking-[0.3em] text-zinc-400 dark:text-zinc-600 uppercase">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 border border-green-500/20 text-green-400 bg-green-500/5">
+                <span className="text-[10px] font-mono px-2 py-0.5 border border-green-500/20 text-green-600 dark:text-green-400 bg-green-500/5">
                   {p.highlight}
                 </span>
               </div>
-              <h3 className="font-display text-xl font-black text-white mb-3 group-hover:text-red-400 transition-colors duration-200">
+              <h3 className="font-display text-xl font-black text-zinc-900 dark:text-white mb-3 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200">
                 {p.name}
               </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed flex-1 mb-5">{p.desc}</p>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed flex-1 mb-5">{p.desc}</p>
               <div className="flex flex-wrap gap-2">
                 {p.tech.map((t) => (
                   <span
                     key={t}
-                    className="text-[10px] font-mono px-2 py-0.5 border border-white/10 text-zinc-500"
+                    className="text-[10px] font-mono px-2 py-0.5 border border-zinc-200 dark:border-white/10 text-zinc-500"
                   >
                     {t}
                   </span>
@@ -459,46 +511,45 @@ function HobbiesSection() {
   ];
 
   return (
-    <section id="hobbies" className="py-24 px-6 border-t border-white/5">
+    <section id="hobbies" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
       <div className="max-w-6xl mx-auto">
         <SectionLabel label="05 — Beyond the Code" />
         <div
           ref={ref}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
+          className={`grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200 dark:bg-white/5 transition-all duration-700 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
           {hobbies.map((h, i) => (
             <div
               key={h.id}
-              className="bg-black group flex flex-col overflow-hidden"
+              className="bg-white dark:bg-black group flex flex-col overflow-hidden"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              {/* Photo slot */}
-              <div className="relative w-full aspect-[4/3] bg-zinc-900 overflow-hidden">
+              <div className="relative w-full aspect-[4/3] bg-zinc-100 dark:bg-zinc-900 overflow-hidden">
                 <img
                   src={h.photo}
                   alt={h.title}
-                  className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                  className="w-full h-full object-cover opacity-80 dark:opacity-70 group-hover:opacity-100 dark:group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
                   onError={(e) => {
                     const target = e.currentTarget;
                     target.style.display = "none";
                     const parent = target.parentElement;
                     if (parent) {
-                      parent.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-xs font-mono text-zinc-600 tracking-widest uppercase">Add photo: ${h.photo}</span></div>`;
+                      parent.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-xs font-mono text-zinc-400 tracking-widest uppercase">Add photo: ${h.photo}</span></div>`;
                     }
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <span className="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 border border-white/10 bg-black/60 text-zinc-400 tracking-widest uppercase">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <span className="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 border border-zinc-200 dark:border-white/10 bg-white/70 dark:bg-black/60 text-zinc-500 dark:text-zinc-400 tracking-widest uppercase">
                   {h.tag}
                 </span>
               </div>
-              {/* Content */}
               <div className="py-6 md:p-6 flex-1 flex flex-col">
-                <h3 className="font-display text-2xl font-black text-white mb-3 group-hover:text-red-400 transition-colors duration-200">
+                <h3 className="font-display text-2xl font-black text-zinc-900 dark:text-white mb-3 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200">
                   {h.title}
                 </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{h.desc}</p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{h.desc}</p>
               </div>
             </div>
           ))}
@@ -510,25 +561,25 @@ function HobbiesSection() {
 
 function ContactSection() {
   return (
-    <section id="contact" className="py-24 px-6 border-t border-white/5">
+    <section id="contact" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
       <div className="max-w-6xl mx-auto">
         <SectionLabel label="06 — Get In Touch" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl font-black text-white leading-tight mb-6">
+            <h2 className="font-display text-4xl md:text-5xl font-black text-zinc-900 dark:text-white leading-tight mb-6">
               Got something
               <br />
               <span className="text-red-500">interesting?</span>
               <br />
               Let&apos;s talk.
             </h2>
-            <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed max-w-sm">
               Open to remote work, freelance, or anything technically challenging.
               No need to be formal — just reach out.
             </p>
           </div>
 
-          <div className="space-y-px bg-white/5">
+          <div className="space-y-px bg-zinc-200 dark:bg-white/5">
             {[
               { label: "Email", value: "tristandean7@gmail.com", href: "mailto:tristandean7@gmail.com" },
               { label: "LinkedIn", value: "linkedin.com/in/deantristan", href: "https://linkedin.com/in/deantristan" },
@@ -539,15 +590,15 @@ function ContactSection() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="flex items-center justify-between bg-black px-6 py-5 group hover:bg-zinc-900/50 transition-colors duration-200"
+                className="flex items-center justify-between bg-white dark:bg-black px-6 py-5 group hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-200"
               >
-                <span className="text-[8px] md:text-[10px] font-mono text-zinc-600 tracking-[0.2em] uppercase w-20">
+                <span className="text-[8px] md:text-[10px] font-mono text-zinc-400 dark:text-zinc-600 tracking-[0.2em] uppercase w-20">
                   {label}
                 </span>
-                <span className="text-[10px] md:text-sm font-mono text-zinc-300 group-hover:text-white transition-colors duration-200 flex-1 text-right">
+                <span className="text-[10px] md:text-sm font-mono text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-200 flex-1 text-right">
                   {value}
                 </span>
-                <span className="ml-4 text-zinc-700 group-hover:text-red-500 transition-colors duration-200 text-sm">
+                <span className="ml-4 text-zinc-400 dark:text-zinc-700 group-hover:text-red-500 transition-colors duration-200 text-sm">
                   →
                 </span>
               </a>
@@ -561,12 +612,12 @@ function ContactSection() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5 px-6 py-8">
+    <footer className="border-t border-zinc-200 dark:border-white/5 px-6 py-8">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-        <span className="font-display text-sm font-black tracking-widest text-zinc-600">
+        <span className="font-display text-sm font-black tracking-widest text-zinc-400 dark:text-zinc-600">
           DN<span className="text-red-600">.</span>
         </span>
-        <span className="text-xs font-mono text-zinc-700 tracking-wider">
+        <span className="text-xs font-mono text-zinc-500 dark:text-zinc-700 tracking-wider">
           © {new Date().getFullYear()} Dean Tristan · Jakarta, Indonesia
         </span>
         <div className="flex gap-6">
@@ -579,7 +630,7 @@ function Footer() {
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="text-xs font-mono text-zinc-600 hover:text-white transition-colors"
+              className="text-xs font-mono text-zinc-500 dark:text-zinc-600 hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               {label}
             </a>
@@ -593,6 +644,32 @@ function Footer() {
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light") {
+      setIsDark(false);
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+      return next;
+    });
+  };
+
   return (
     <>
       <Head>
@@ -619,10 +696,8 @@ export default function Home() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
-          background: #000;
-          color: #fff;
-          font-family: "JetBrains Mono", monospace;
           -webkit-font-smoothing: antialiased;
+          font-family: "JetBrains Mono", monospace;
         }
 
         .font-display { font-family: "Bebas Neue", sans-serif; }
@@ -661,9 +736,14 @@ export default function Home() {
 
         .bg-grid {
           background-image:
+            linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+          background-size: 60px 60px;
+        }
+        html.dark .bg-grid {
+          background-image:
             linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-          background-size: 60px 60px;
         }
 
         @keyframes fadeIn {
@@ -673,15 +753,16 @@ export default function Home() {
         .animate-fadeIn { animation: fadeIn 0.35s ease forwards; }
 
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 2px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 2px; }
+        html.dark ::-webkit-scrollbar-thumb { background: #27272a; }
         ::-webkit-scrollbar-thumb:hover { background: #dc2626; }
 
         ::selection { background: #dc2626; color: #fff; }
       `}</style>
 
-      <div className="bg-black min-h-screen">
-        <NavBar />
+      <div className="bg-white dark:bg-black min-h-screen text-zinc-900 dark:text-white">
+        <NavBar isDark={isDark} onToggle={toggleTheme} />
         <HeroSection />
         <SkillsSection />
         <ExperienceSection />
