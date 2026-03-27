@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#000000"/>
+
+  <!-- Vertical accent lines kiri & kanan — simetris -->
+  <rect x="44" y="44" width="5" height="120" fill="#dc2626"/>
+  <rect x="463" y="44" width="5" height="120" fill="#dc2626"/>
+
+  <!-- D — kuadran kiri, center x=150 -->
+  <text
+    x="148"
+    y="226"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-weight="900"
+    font-size="218"
+    fill="#ffffff"
+    text-anchor="middle"
+  >D</text>
+
+  <!-- T — kuadran kanan, center x=362 -->
+  <text
+    x="364"
+    y="226"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-weight="900"
+    font-size="218"
+    fill="#dc2626"
+    text-anchor="middle"
+  >T</text>
+
+  <!-- Divider line -->
+  <rect x="44" y="252" width="424" height="3" fill="#2a2a2a"/>
+
+  <!-- DEAN -->
+  <text
+    x="48"
+    y="326"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-weight="900"
+    font-size="74"
+    fill="#ffffff"
+    text-anchor="start"
+    letter-spacing="3"
+  >DEAN</text>
+
+  <!-- TRISTAN -->
+  <text
+    x="48"
+    y="406"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-weight="900"
+    font-size="74"
+    fill="#dc2626"
+    text-anchor="start"
+    letter-spacing="3"
+  >TRISTAN</text>
+
+  <!-- Red dot — bottom right, sejajar sama garis kanan -->
+  <circle cx="452" cy="462" r="22" fill="#dc2626"/>
+
+</svg>

@@ -79,28 +79,28 @@ const experiences = [
 
 const projects = [
   {
-    name: "iLearn — Exam Platform",
-    desc: "BRI's internal exam platform that used to lag and crash during peak hours. Rebuilt the whole thing with Next.js, gRPC, and Kafka. Now it handles thousands of concurrent exam sessions without a hiccup.",
-    tech: ["Next.js", "gRPC", "Kafka", "Golang"],
-    highlight: "Zero downtime at peak load",
+    name: "BRISmart",
+    desc: "Large-scale LMS serving thousands of BRI employees. Built on gRPC, Kafka, and Golang, with load balancing and goroutines handling the concurrent load. Features cover the full range: learning modules, assignments, exams, video streaming, gamification, employee evaluation, analytics dashboard, and an AI-powered chat assistant. Most complex system I've worked on — and it holds up.",
+    tech: ["Golang", "gRPC", "Next.JS", "Kafka"],
+    highlight: "Enterprise LMS, Bank Rakyat Indonesia",
   },
   {
-    name: "LMS Platform — Social & Gamification",
-    desc: "Part of a large internal LMS ecosystem — built the gamification system, social feed with reels and video sharing, and a discussion forum. Multiple services talking to each other, all in one platform.",
-    tech: ["Golang", "PHP", "MySQL", "Redis", "Kafka"],
-    highlight: "All-in-one internal platform",
+    name: "Renaldocx",
+    desc: "Backend and dashboard for a telemedicine app focused on kidney health. Built with Laravel, designed around clinical workflows. In healthcare, reliability isn't a feature — it's the baseline.",
+    tech: ["PHP", "Laravel", "PostgreSQL", "CI/CD", "Docker"],
+    highlight: "Telemedicine Platform",
   },
   {
-    name: "Elastic Search Integration",
-    desc: "Integrated Elasticsearch into the LMS platform to power fast, relevant search across learning content, users, and forum posts. Replaced slow SQL-based search that didn't scale.",
-    tech: ["Elasticsearch", "Golang", "PHP"],
-    highlight: "Platform-wide search",
+    name: "Lipmance",
+    desc: "Performance tracking system for one of Indonesia's biggest logistics companies. I handled the entire backend logic and business rules in Golang, Vue on the frontend. KPI systems don't have room for error — the numbers have to be right, every time.",
+    tech: ["Golang", "Echo", "TypeScript", "Vue"],
+    highlight: "KPI Management System, Lion Parcel",
   },
   {
-    name: "Solu Platform Architecture",
-    desc: "As Tech Lead at Solu, redesigned the entire web architecture so it could actually grow with the product. Brought in CI/CD and automation to replace a lot of manual, error-prone steps.",
-    tech: ["PHP", "CodeIgniter", "MySQL", "CI/CD", "Docker"],
-    highlight: "Led the team end-to-end",
+    name: "Mobsen",
+    desc: "Built this one from scratch. Architecture, business logic, deployment — all mine. Covers employee management, attendance, and day-to-day operational workflows. Full-stack Laravel, live in production.",
+    tech: ["PHP", "Laravel", "MySQL", "CI/CD", "Docker"],
+    highlight: "HR Management Platform",
   },
 ];
 
@@ -166,7 +166,7 @@ function GlitchText({ text, className = "" }: { text: string; className?: string
 function SectionLabel({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 mb-12">
-      <span className="text-xs font-mono tracking-[0.3em] text-red-500 uppercase">{label}</span>
+      <span className="text-xs 3xl:text-sm font-mono tracking-[0.3em] text-red-500 uppercase">{label}</span>
       <div className="h-px flex-1 bg-gradient-to-r from-red-500/40 to-transparent" />
     </div>
   );
@@ -192,7 +192,7 @@ function NavBar({ isDark, onToggle }: { isDark: boolean; onToggle: () => void })
           : ""
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto px-6 py-5 3xl:px-12 3xl:py-7 flex items-center justify-between">
         <a href="#" className="font-display text-lg font-black tracking-widest text-zinc-900 dark:text-white">
           DN<span className="text-red-500">.</span>
         </a>
@@ -244,7 +244,7 @@ function NavBar({ isDark, onToggle }: { isDark: boolean; onToggle: () => void })
               key={l}
               href={`#${l}`}
               onClick={() => setMenuOpen(false)}
-              className="text-sm font-mono tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              className="text-sm 3xl:text-base font-mono tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             >
               {l}
             </a>
@@ -265,14 +265,14 @@ function HeroSection() {
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-900/10 rounded-full blur-[80px] pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto w-full">
+      <div className="relative max-w-6xl 3xl:max-w-[1900px] mx-auto w-full">
         <div className="inline-flex items-center gap-2 mb-8 px-3 py-1.5 border border-green-500/30 bg-green-500/5 rounded-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-xs font-mono text-green-400 tracking-widest uppercase">Open to Remote</span>
+          <span className="text-xs 3xl:text-base font-mono text-green-400 tracking-widest uppercase">Open to Remote</span>
         </div>
 
         <div className="space-y-4">
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] font-black leading-none tracking-tight text-zinc-900 dark:text-white">
+          <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] 3xl:text-[14rem] font-black leading-none tracking-tight text-zinc-900 dark:text-white">
             DEAN
             <br />
             <GlitchText text="TRISTAN" className="text-zinc-900 dark:text-white" />
@@ -280,13 +280,13 @@ function HeroSection() {
         </div>
 
         <div className="mt-8 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
-          <div className="max-w-lg">
-            <p className="text-zinc-700 dark:text-zinc-300 text-lg leading-relaxed font-light">
+          <div className="max-w-lg 3xl:max-w-2xl">
+            <p className="text-zinc-700 dark:text-zinc-300 text-lg 3xl:text-2xl leading-relaxed font-light">
               Backend engineer, 5+ years building internal platforms at scale.
               Currently at{" "}
               <span className="text-zinc-900 dark:text-white font-medium">BRI</span> — writing code and leading a squad.
             </p>
-            <p className="mt-3 text-zinc-500 text-sm leading-relaxed">
+            <p className="mt-3 text-zinc-500 text-sm 3xl:text-lg leading-relaxed">
               Mainly Golang and PHP. I like the problems that only show up at scale —
               Kafka, gRPC, systems that hold up when things get busy. Based in Jakarta.
             </p>
@@ -295,13 +295,13 @@ function HeroSection() {
           <div className="flex gap-4">
             <a
               href="#projects"
-              className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white text-sm font-mono tracking-widest uppercase transition-colors duration-200"
+              className="px-6 py-3 3xl:px-10 3xl:py-5 bg-red-600 hover:bg-red-500 text-white text-sm 3xl:text-lg font-mono tracking-widest uppercase transition-colors duration-200"
             >
               View Work
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 border border-zinc-300 dark:border-white/20 hover:border-zinc-500 dark:hover:border-white/50 text-zinc-900 dark:text-white text-sm font-mono tracking-widest uppercase transition-colors duration-200"
+              className="px-6 py-3 3xl:px-10 3xl:py-5 border border-zinc-300 dark:border-white/20 hover:border-zinc-500 dark:hover:border-white/50 text-zinc-900 dark:text-white text-sm 3xl:text-lg font-mono tracking-widest uppercase transition-colors duration-200"
             >
               Contact
             </a>
@@ -314,9 +314,9 @@ function HeroSection() {
             { n: "80%", label: "Faster Query Times" },
             { n: "BRI", label: "Current Company" },
           ].map(({ n, label }) => (
-            <div key={label} className="bg-white dark:bg-black px-6 py-5">
-              <div className="font-display text-2xl font-black text-red-500">{n}</div>
-              <div className="text-xs font-mono text-zinc-500 tracking-wider mt-1 uppercase">{label}</div>
+            <div key={label} className="bg-white dark:bg-black px-6 py-5 3xl:px-10 3xl:py-8">
+              <div className="font-display text-2xl 3xl:text-5xl font-black text-red-500">{n}</div>
+              <div className="text-xs 3xl:text-base font-mono text-zinc-500 tracking-wider mt-1 uppercase">{label}</div>
             </div>
           ))}
         </div>
@@ -333,8 +333,8 @@ function HeroSection() {
 function SkillsSection() {
   const { ref, visible } = useIntersectionObserver();
   return (
-    <section id="skills" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-24 3xl:py-36 px-6 border-t border-zinc-200 dark:border-white/5">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto">
         <SectionLabel label="02 — Tech Stack" />
         <div
           ref={ref}
@@ -348,14 +348,14 @@ function SkillsSection() {
               className="bg-white dark:bg-black p-6 group hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-300"
               style={{ transitionDelay: `${i * 60}ms` }}
             >
-              <h3 className="text-[10px] font-mono tracking-[0.3em] text-red-500 uppercase mb-4">
+              <h3 className="text-[10px] 3xl:text-sm font-mono tracking-[0.3em] text-red-500 uppercase mb-4">
                 {category}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {items.map((item) => (
                   <span
                     key={item}
-                    className="text-xs px-2.5 py-1 border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 font-mono group-hover:border-zinc-300 dark:group-hover:border-white/20 transition-colors duration-300"
+                    className="text-xs 3xl:text-sm px-2.5 py-1 3xl:px-3.5 3xl:py-1.5 border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 font-mono group-hover:border-zinc-300 dark:group-hover:border-white/20 transition-colors duration-300"
                   >
                     {item}
                   </span>
@@ -374,8 +374,8 @@ function ExperienceSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="experience" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="py-24 3xl:py-36 px-6 border-t border-zinc-200 dark:border-white/5">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto">
         <SectionLabel label="03 — Experience" />
         <div
           ref={ref}
@@ -394,10 +394,10 @@ function ExperienceSection() {
                     : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-white/[0.02]"
                 }`}
               >
-                <div className="font-bold text-[11px] tracking-wide">
+                <div className="font-bold text-[11px] 3xl:text-sm tracking-wide">
                   {exp.company.split(" ").slice(0, 3).join(" ")}
                 </div>
-                <div className="text-[10px] text-zinc-400 dark:text-zinc-600 mt-0.5 tracking-wider">
+                <div className="text-[10px] 3xl:text-xs text-zinc-400 dark:text-zinc-600 mt-0.5 tracking-wider">
                   {exp.period.split(" – ")[0]}
                 </div>
               </button>
@@ -409,17 +409,17 @@ function ExperienceSection() {
               const exp = experiences[active];
               return (
                 <div key={active} className="animate-fadeIn">
-                  <h3 className="font-display text-xl font-black text-zinc-900 dark:text-white mb-1">{exp.role}</h3>
+                  <h3 className="font-display text-xl 3xl:text-3xl font-black text-zinc-900 dark:text-white mb-1">{exp.role}</h3>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 mb-6">
-                    <span className="text-red-400 text-sm font-mono">{exp.company}</span>
+                    <span className="text-red-400 text-sm 3xl:text-base font-mono">{exp.company}</span>
                     <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono self-center">·</span>
-                    <span className="text-zinc-500 text-xs font-mono">{exp.period}</span>
+                    <span className="text-zinc-500 text-xs 3xl:text-sm font-mono">{exp.period}</span>
                     <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono self-center">·</span>
-                    <span className="text-zinc-500 text-xs font-mono">{exp.type}</span>
+                    <span className="text-zinc-500 text-xs 3xl:text-sm font-mono">{exp.type}</span>
                   </div>
                   <ul className="space-y-3">
                     {exp.points.map((p, j) => (
-                      <li key={j} className="flex gap-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      <li key={j} className="flex gap-3 text-sm 3xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         <span className="text-red-500 mt-1.5 text-[8px]">▶</span>
                         <span>{p}</span>
                       </li>
@@ -438,8 +438,8 @@ function ExperienceSection() {
 function ProjectsSection() {
   const { ref, visible } = useIntersectionObserver();
   return (
-    <section id="projects" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-24 3xl:py-36 px-6 border-t border-zinc-200 dark:border-white/5">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto">
         <SectionLabel label="04 — Selected Work" />
         <div
           ref={ref}
@@ -454,22 +454,22 @@ function ProjectsSection() {
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <div className="flex items-start justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-[0.3em] text-zinc-400 dark:text-zinc-600 uppercase">
+                <span className="text-[10px] 3xl:text-xs font-mono tracking-[0.3em] text-zinc-400 dark:text-zinc-600 uppercase">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 border border-green-500/20 text-green-600 dark:text-green-400 bg-green-500/5">
+                <span className="text-[10px] 3xl:text-xs font-mono px-2 py-0.5 3xl:px-3 3xl:py-1 border border-green-500/20 text-green-600 dark:text-green-400 bg-green-500/5">
                   {p.highlight}
                 </span>
               </div>
-              <h3 className="font-display text-xl font-black text-zinc-900 dark:text-white mb-3 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200">
+              <h3 className="font-display text-xl 3xl:text-2xl font-black text-zinc-900 dark:text-white mb-3 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200">
                 {p.name}
               </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed flex-1 mb-5">{p.desc}</p>
+              <p className="text-sm 3xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed flex-1 mb-5">{p.desc}</p>
               <div className="flex flex-wrap gap-2">
                 {p.tech.map((t) => (
                   <span
                     key={t}
-                    className="text-[10px] font-mono px-2 py-0.5 border border-zinc-200 dark:border-white/10 text-zinc-500"
+                    className="text-[10px] 3xl:text-xs font-mono px-2 py-0.5 3xl:px-3 3xl:py-1 border border-zinc-200 dark:border-white/10 text-zinc-500"
                   >
                     {t}
                   </span>
@@ -511,8 +511,8 @@ function HobbiesSection() {
   ];
 
   return (
-    <section id="hobbies" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <section id="hobbies" className="py-24 3xl:py-36 px-6 border-t border-zinc-200 dark:border-white/5">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto">
         <SectionLabel label="05 — Beyond the Code" />
         <div
           ref={ref}
@@ -546,10 +546,10 @@ function HobbiesSection() {
                 </span>
               </div>
               <div className="py-6 md:p-6 flex-1 flex flex-col">
-                <h3 className="font-display text-2xl font-black text-zinc-900 dark:text-white mb-3 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200">
+                <h3 className="font-display text-2xl 3xl:text-4xl font-black text-zinc-900 dark:text-white mb-3 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200">
                   {h.title}
                 </h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{h.desc}</p>
+                <p className="text-sm 3xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">{h.desc}</p>
               </div>
             </div>
           ))}
@@ -561,19 +561,19 @@ function HobbiesSection() {
 
 function ContactSection() {
   return (
-    <section id="contact" className="py-24 px-6 border-t border-zinc-200 dark:border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-24 3xl:py-36 px-6 border-t border-zinc-200 dark:border-white/5">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto">
         <SectionLabel label="06 — Get In Touch" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl font-black text-zinc-900 dark:text-white leading-tight mb-6">
+            <h2 className="font-display text-4xl md:text-5xl 3xl:text-8xl font-black text-zinc-900 dark:text-white leading-tight mb-6">
               Got something
               <br />
               <span className="text-red-500">interesting?</span>
               <br />
               Let&apos;s talk.
             </h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed max-w-sm">
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm 3xl:text-lg leading-relaxed max-w-sm 3xl:max-w-xl">
               Open to remote work, freelance, or anything technically challenging.
               No need to be formal — just reach out.
             </p>
@@ -592,10 +592,10 @@ function ContactSection() {
                 rel="noreferrer"
                 className="flex items-center justify-between bg-white dark:bg-black px-6 py-5 group hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-200"
               >
-                <span className="text-[8px] md:text-[10px] font-mono text-zinc-400 dark:text-zinc-600 tracking-[0.2em] uppercase w-20">
+                <span className="text-[8px] md:text-[10px] 3xl:text-sm font-mono text-zinc-400 dark:text-zinc-600 tracking-[0.2em] uppercase w-20 3xl:w-32">
                   {label}
                 </span>
-                <span className="text-[10px] md:text-sm font-mono text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-200 flex-1 text-right">
+                <span className="text-[10px] md:text-sm 3xl:text-base font-mono text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-200 flex-1 text-right">
                   {value}
                 </span>
                 <span className="ml-4 text-zinc-400 dark:text-zinc-700 group-hover:text-red-500 transition-colors duration-200 text-sm">
@@ -613,11 +613,11 @@ function ContactSection() {
 function Footer() {
   return (
     <footer className="border-t border-zinc-200 dark:border-white/5 px-6 py-8">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="max-w-6xl 3xl:max-w-[1900px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <span className="font-display text-sm font-black tracking-widest text-zinc-400 dark:text-zinc-600">
           DN<span className="text-red-600">.</span>
         </span>
-        <span className="text-xs font-mono text-zinc-500 dark:text-zinc-700 tracking-wider">
+        <span className="text-xs 3xl:text-sm font-mono text-zinc-500 dark:text-zinc-700 tracking-wider">
           © {new Date().getFullYear()} Dean Tristan · Jakarta, Indonesia
         </span>
         <div className="flex gap-6">
@@ -630,7 +630,7 @@ function Footer() {
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="text-xs font-mono text-zinc-500 dark:text-zinc-600 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              className="text-xs 3xl:text-sm font-mono text-zinc-500 dark:text-zinc-600 hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               {label}
             </a>
