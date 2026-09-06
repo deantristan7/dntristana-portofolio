@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- iPhone 16 & Safari Mobile specific viewport with viewport-fit=cover for Dynamic Island & safe areas -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#FFF5F5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <title>Selamat Ulang Tahun, Lavia Meiras Putri</title>
+  <meta name="description" content="Surat cinta dan ucapan ulang tahun spesial untuk Lavia Meiras Putri tercinta.">
+
+  <!-- Preconnect and Modern Romantic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Ambient background canvas for slow, romantic floating petals & sparkles -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Audio Element (Safari friendly, loop, preloaded) -->
+  <audio id="bg-audio" preload="auto" loop playsinline>
+    <source src="assets/hbd-8bit.mp3" type="audio/mpeg">
+    <source src="/assets/hbd-8bit.mp3" type="audio/mpeg">
+    <source src="assets/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Audio Control (Safe-area aware, minimalist & elegant, no emojis) -->
+  <button id="music-toggle" class="music-pill hidden" aria-label="Toggle Musik" title="Putar / Jeda Audio">
+    <span class="music-icon-wrap">
+      <svg class="music-sound-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+      </svg>
+      <span class="music-wave">
+        <i></i><i></i><i></i><i></i>
+      </span>
+    </span>
+    <span class="music-label">8-bit Birthday</span>
+  </button>
+
+  <!-- ==============================================
+       STAGE 1: THE ENVELOPE / GIFT BOX INTRO SCREEN
+       (Crucial for iOS Safari Autoplay & Grand Reveal)
+       ============================================== -->
+  <section id="intro-stage" class="intro-screen" aria-label="Layar Pembuka">
+    <div class="intro-container">
+      <div class="intro-tag">
+        <span>A Special Delivery For You</span>
+      </div>
+
+      <!-- Romantic Postal Envelope Graphic (Clean & Artisanal, No Emojis) -->
+      <div class="envelope-card" id="envelope-wrapper">
+        <div class="envelope-stamp">
+          <span class="stamp-text">AIR MAIL</span>
+        </div>
+        <div class="envelope-meta">
+          <p class="to-label">Untuk</p>
+          <h2 class="recipient-name">Lavia Meiras Putri</h2>
+          <p class="special-occasion">Hari Spesial • Ulang Tahunmu</p>
+        </div>
+      </div>
+
+      <p class="intro-hint">Coba di buka yaaaa, ada something buat kamuu...</p>
+
+      <!-- Primary Action: Unlocks iOS Audio Context & Triggers Reveal -->
+      <button id="btn-open-gift" class="btn-romantic-primary" type="button">
+        <span class="btn-text">Buka Sekarang</span>
+        <span class="btn-glow"></span>
+      </button>
+
+      <div class="audio-notice">
+        <span>Kencengin volume hp nya okeeyyyy!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       STAGE 2: MAIN CELEBRATION & LOVE LETTER
+       ============================================== -->
+  <main id="main-stage" class="main-content hidden" aria-hidden="true">
+    <div class="mobile-wrapper">
+
+      <!-- Header Badge -->
+      <div class="celebration-badge">
+        <span class="badge-dot"></span>
+        <span>Today is Your Day, Bibuppppp!!!</span>
+        <span class="badge-dot"></span>
+      </div>
+
+      <!-- Main Heading with Editorial Serif Typography -->
+      <header class="main-header">
+        <h1 class="main-title">
+          Selamat Ulang Tahun,
+          <span class="name-highlight">Lavia Meiras Putri</span>
+        </h1>
+        <div class="title-sub">
+          <span>Semesta merayakan hari lahirnya perempuan hebat, </br> pacarku tersayang.</span>
+        </div>
+      </header>
+
+      <!-- Featured Photo Section: Her Pixel Art Avatar in Polaroid Frame -->
+      <section class="photo-showcase" aria-label="Foto Lavia">
+        <div class="polaroid-card">
+          <div class="polaroid-tape"></div>
+          <div class="polaroid-img-box">
+            <img id="lavia-portrait" src="assets/lavia.jpg" alt="Lavia Meiras Putri" loading="eager">
+          </div>
+          <p class="polaroid-caption">Lavia Meiras Putri</p>
+          <span class="polaroid-subcaption">the birthday girl</span>
+        </div>
+      </section>
+
+      <!-- Custom Handcrafted Vector Birthday Cake with Interactive Candle -->
+      <section class="cake-showcase" aria-label="Kue Ulang Tahun">
+        <div class="cake-card-container">
+
+          <!-- Interactive Cake SVG -->
+          <div class="svg-cake-wrapper" id="cake-interactive-area" role="button" tabindex="0"
+            aria-label="Ketuk untuk tiup lilin">
+            <svg class="custom-cake-svg" viewBox="0 0 320 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Shadows & Filters -->
+                <filter id="cakeShadow" x="-10%" y="-10%" width="120%" height="130%" filterUnits="userSpaceOnUse">
+                  <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#D4737D" flood-opacity="0.18" />
+                </filter>
+                <filter id="flameGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" result="glow" />
+                  <feMerge>
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <!-- Linear Gradients for Soft Pastels -->
+                <linearGradient id="plateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFFFF" />
+                  <stop offset="100%" stop-color="#F2E6E6" />
+                </linearGradient>
+
+                <linearGradient id="tierBottomGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFDEE9" />
+                  <stop offset="60%" stop-color="#F9CED7" />
+                  <stop offset="100%" stop-color="#F4BAC8" />
+                </linearGradient>
+
+                <linearGradient id="tierTopGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFDF9" />
+                  <stop offset="70%" stop-color="#FFF0F3" />
+                  <stop offset="100%" stop-color="#FCE1E7" />
+                </linearGradient>
+
+                <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#FF5722" />
+                  <stop offset="35%" stop-color="#FFA000" />
+                  <stop offset="75%" stop-color="#FFEB3B" />
+                  <stop offset="100%" stop-color="#FFFFFF" />
+                </linearGradient>
+
+                <linearGradient id="candleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#FF9EAA" />
+                  <stop offset="50%" stop-color="#FFDEE9" />
+                  <stop offset="100%" stop-color="#FF9EAA" />
+                </linearGradient>
+              </defs>
+
+              <!-- Cake Pedestal Stand -->
+              <ellipse cx="160" cy="272" rx="90" ry="12" fill="#E6D3D6" opacity="0.6" />
+              <path d="M125 268 C125 248 135 240 142 232 L178 232 C185 240 195 248 195 268 Z" fill="url(#plateGrad)" />
+              <ellipse cx="160" cy="232" rx="120" ry="16" fill="url(#plateGrad)" filter="url(#cakeShadow)" />
+              <ellipse cx="160" cy="230" rx="114" ry="13" fill="#FFF8F8" stroke="#F4BAC8" stroke-width="1.5" />
+
+              <!-- Tier 1 (Bottom Cake) -->
+              <g id="bottom-tier">
+                <path
+                  d="M65 170 C65 170 65 212 65 215 C65 228 107 236 160 236 C213 236 255 228 255 215 C255 212 255 170 255 170 Z"
+                  fill="url(#tierBottomGrad)" filter="url(#cakeShadow)" />
+                <path
+                  d="M65 215 Q80 224 95 218 Q110 224 125 218 Q140 224 160 218 Q180 224 195 218 Q210 224 225 218 Q240 224 255 215"
+                  fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+
+                <ellipse cx="160" cy="170" rx="95" ry="17" fill="#FDE5EC" />
+                <path
+                  d="M65 170 C75 182 85 186 95 176 C105 190 120 194 135 178 C150 195 170 196 185 178 C198 193 212 188 225 176 C238 186 248 180 255 170 Z"
+                  fill="#F8A5B8" opacity="0.6" />
+
+                <!-- Golden Sugar Pearl Sprinkles -->
+                <circle cx="90" cy="195" r="2.5" fill="#D4AF37" />
+                <circle cx="115" cy="205" r="2" fill="#E88B9E" />
+                <circle cx="140" cy="200" r="2.5" fill="#D4AF37" />
+                <circle cx="160" cy="208" r="2.2" fill="#FFFFFF" />
+                <circle cx="180" cy="198" r="2.5" fill="#D4AF37" />
+                <circle cx="205" cy="204" r="2" fill="#E88B9E" />
+                <circle cx="230" cy="196" r="2.5" fill="#D4AF37" />
+              </g>
+
+              <!-- Tier 2 (Top Cake) -->
+              <g id="top-tier">
+                <path
+                  d="M98 116 C98 116 98 160 98 162 C98 173 125 180 160 180 C195 180 222 173 222 162 C222 160 222 116 222 116 Z"
+                  fill="url(#tierTopGrad)" />
+                <ellipse cx="160" cy="116" rx="62" ry="14" fill="#FFFFFF" />
+                <path
+                  d="M98 116 C108 128 116 132 124 122 C134 136 146 138 156 124 C166 138 178 136 188 122 C198 134 208 130 222 116 Z"
+                  fill="#FFF3F6" />
+
+                <!-- Strawberries on top -->
+                <path d="M120 108 C115 100 126 92 134 98 C138 104 135 114 126 114 C120 114 117 111 120 108 Z"
+                  fill="#E63946" />
+                <ellipse cx="128" cy="95" rx="4" ry="2" fill="#2D6A4F" />
+                <path d="M186 108 C182 100 193 92 201 98 C205 104 202 114 193 114 C187 114 184 111 186 108 Z"
+                  fill="#E63946" />
+                <ellipse cx="194" cy="95" rx="4" ry="2" fill="#2D6A4F" />
+
+                <circle cx="145" cy="112" r="5" fill="#FFFFFF" stroke="#FFE3EB" stroke-width="1.5" />
+                <circle cx="175" cy="112" r="5" fill="#FFFFFF" stroke="#FFE3EB" stroke-width="1.5" />
+              </g>
+
+              <!-- Birthday Candle -->
+              <g id="birthday-candle">
+                <rect x="156" y="58" width="8" height="46" rx="4" fill="url(#candleGrad)" stroke="#F28B9F"
+                  stroke-width="0.8" />
+                <path d="M156 68 L164 64 M156 78 L164 74 M156 88 L164 84 M156 98 L164 94" stroke="#FFFFFF"
+                  stroke-width="2" stroke-linecap="round" />
+                <line x1="160" y1="58" x2="160" y2="48" stroke="#4A2228" stroke-width="2" stroke-linecap="round" />
+
+                <!-- Flame Glow & Flame -->
+                <g id="candle-flame-group" class="flame-flicker">
+                  <ellipse cx="160" cy="35" rx="16" ry="22" fill="#FFC107" opacity="0.25" filter="url(#flameGlow)" />
+                  <path d="M160 16 C153 28 149 37 154 44 C158 49 162 49 166 44 C171 37 167 28 160 16 Z"
+                    fill="url(#flameGrad)" filter="url(#flameGlow)" />
+                  <path d="M160 30 C157 36 156 41 158 45 C160 48 161 48 162 45 C164 41 163 36 160 30 Z"
+                    fill="#FFFFFF" />
+                </g>
+
+                <!-- Smoke Effect (Hidden by default, triggered on blow) -->
+                <g id="candle-smoke" class="smoke-puff hidden">
+                  <path d="M160 46 Q156 34 162 25 T158 10" fill="none" stroke="#D3C5C7" stroke-width="2.5"
+                    stroke-linecap="round" stroke-dasharray="4 2" />
+                  <circle cx="157" cy="8" r="3" fill="#D3C5C7" opacity="0.6" />
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Interactive Tip: Blow the candle -->
+          <div class="candle-interactive-bar">
+            <button id="btn-blow-candle" class="btn-blow" type="button">
+              <span id="blow-label">Tiup Lilin-nya</span>
+            </button>
+            <div id="wish-banner" class="wish-banner hidden">
+              <span>Make a wish! Semoga semua impianmu terkabul, ebebbbbb.</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================================
+           STAGE 3: THE HEARTFELT LOVE LETTER
+           (Artisanal Keepsake Aesthetic — Clean & Personal)
+           ============================================== -->
+      <section class="love-letter-section" aria-label="Surat Cinta untuk Lavia">
+
+        <!-- Letter Container with Warm Vintage Texture & Deckle Border -->
+        <article class="letter-paper">
+
+          <!-- Top Washi Tape Accent -->
+          <div class="washi-tape"></div>
+
+          <!-- Letter Header -->
+          <div class="letter-salutation">
+            <span class="letter-date" id="current-date-display">Spesial Hari Ini</span>
+            <h3 class="salutation-title">Halooo bebbbb...</h3>
+          </div>
+
+          <!-- Paragraph 1: Sapaan Hangat -->
+          <div class="letter-block">
+            <p class="letter-text romantic-opening">
+              Selamat ulang tahun sayanggkuuu <br /><strong class="name-em">Lavia Meiras Putri</strong>,
+            </p>
+          </div>
+
+          <!-- Paragraph 2: Gombalan Garam (Clean & Intimate) -->
+          <div class="salt-joke-box">
+            <div class="joke-bubble-intro">
+              <p class="joke-q">
+                Kamu tau ga bedanya kamu sama garem?
+              </p>
+            </div>
+            <div class="joke-punchline">
+              <p class="joke-a">
+                Kalo garem asin... <br>
+                <span class="joke-highlight">Kalo kamu manis &lt;3</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Paragraph 3: Doa & Harapan Sepenuh Hati (Clean Minimalist Pointers) -->
+          <div class="letter-block wishes-block">
+            <div class="wish-item">
+              <p class="letter-text">
+                Semoga kedepannya semakin banyak rezeki nya sayangg,
+              </p>
+            </div>
+
+            <div class="wish-item">
+              <p class="letter-text">
+                Makin-makin cantiknya biar aku makin meleleh liat kamu setiap harii,
+              </p>
+            </div>
+
+            <div class="wish-item special-strengths">
+              <p class="letter-text">
+                Makin pinterr, makin rajin, makin hebat, makin keren, makin mantap!
+              </p>
+            </div>
+          </div>
+
+          <!-- Paragraph 4: Rasa Syukur & Harapan Selamanya -->
+          <div class="letter-block gratitude-block">
+            <p class="letter-text">
+              Makasi ya sayanggg udah nemenin aku selama inii, wish you all the best,
+            </p>
+            <p class="letter-text promise-text">
+              Semoga kita langgeng-langgeng ya sayanggg, sampe tua nantiii...
+            </p>
+          </div>
+
+          <!-- Paragraph 5: Penutup Romantis Tulisan Tangan -->
+          <div class="letter-sign-off">
+            <p class="script-love">
+              Love u sayanggg!!! <br>
+              <span class="love-repeated">Love u Love u Love uuuuuu</span>
+            </p>
+            <div class="sender-stamp">
+              <span class="always-yours">With love,</span>
+              <span class="sender-name">Dean</span>
+            </div>
+          </div>
+
+          <!-- Clean Love Interaction Button -->
+          <div class="interaction-footer">
+            <button id="btn-send-love" class="btn-love-burst" type="button">
+              <svg class="heart-icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+              <span>Kirim Peluk ke Pacarmuuu</span>
+              <span id="love-counter" class="love-count-badge">0</span>
+            </button>
+            <p class="tap-hint">(Tap-tap sampe jebol beb, SAMPE 25x YAA!!!)</p>
+          </div>
+
+        </article>
+      </section>
+
+      <!-- Romantic Footer Note -->
+      <footer class="page-footer">
+        <p class="footer-small">
+          Made with full of love for my birthday girl <strong>Lavia Meiras Putri</strong>
+        </p>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Sweet Toast Notification Container -->
+  <div id="toast-container" class="toast-popup hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
