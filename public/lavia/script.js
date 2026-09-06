@@ -216,7 +216,7 @@
       const rect = cakeInteractiveArea.getBoundingClientRect();
       spawnSparkleBurst(rect.left + rect.width / 2, rect.top + 50);
 
-      showToast('Semoga semua harapan dan impian Lavia terkabul ya sayang.');
+      showToast('Semoga semua harapan dan impian kamu terkabul ya sayang.');
     } else {
       // Relight candle
       isCandleLit = true;
@@ -225,7 +225,7 @@
       wishBanner.classList.add('hidden');
 
       blowLabel.textContent = 'Tiup Lilin';
-      showToast('Lilin dinyalakan kembali.');
+      showToast('Lilin-nya udah nyala lagi');
     }
   }
 
